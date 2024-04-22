@@ -15,7 +15,7 @@ class InventoryController(
     private val inventoryServices: InventoryServices
 ) {
     @GetMapping("/")
-    fun listAllItems(
+    fun getAllItems(
         @RequestParam(value = "page", defaultValue = "0") page: Int,
         @RequestParam(value = "size", defaultValue = "10") size: Int,
         @RequestParam(value = "sort", defaultValue = "name.asc") sort: String
