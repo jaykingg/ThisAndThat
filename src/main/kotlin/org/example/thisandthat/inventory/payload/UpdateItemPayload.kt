@@ -1,9 +1,13 @@
-package org.example.thisandthat.testpractice.payload
+package org.example.thisandthat.inventory.payload
 
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotEmpty
 
-data class SaveItemPayload(
+data class UpdateItemPayload(
+    @field: NotEmpty
+    val id: Long,
+
     @field: NotBlank
     val name: String,
 
@@ -15,6 +19,5 @@ data class SaveItemPayload(
 
     @field: Min(0)
     val quantity: Int,
-
     var enable: Boolean = true
 )

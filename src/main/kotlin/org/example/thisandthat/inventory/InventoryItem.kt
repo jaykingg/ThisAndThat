@@ -1,4 +1,4 @@
-package org.example.thisandthat.testpractice
+package org.example.thisandthat.inventory
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue

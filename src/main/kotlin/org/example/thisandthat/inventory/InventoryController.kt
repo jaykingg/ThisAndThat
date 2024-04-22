@@ -1,7 +1,7 @@
-package org.example.thisandthat.testpractice
+package org.example.thisandthat.inventory
 
-import org.example.thisandthat.testpractice.payload.SaveItemPayload
-import org.example.thisandthat.testpractice.payload.UpdateItemPayload
+import org.example.thisandthat.inventory.payload.SaveItemPayload
+import org.example.thisandthat.inventory.payload.UpdateItemPayload
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
