@@ -36,7 +36,7 @@ class InventoryController(
         } ?: ResponseEntity.notFound().build()
     }
 
-    @PutMapping("/update")
+    @PutMapping("/")
     fun updateItem(@RequestBody payload: UpdateItemPayload): ResponseEntity<InventoryItem> {
         return inventoryServices.updateItem(payload)?.let {
             ResponseEntity.ok(it)
