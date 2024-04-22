@@ -30,7 +30,7 @@ class InventoryController(
     }
 
     @GetMapping("/{id}")
-    fun getItemById(@PathVariable id: Long): ResponseEntity<InventoryItem> {
+    fun getItem(@PathVariable id: Long): ResponseEntity<InventoryItem> {
         return inventoryServices.getItemById(id)?.let {
             ResponseEntity.ok(it)
         } ?: ResponseEntity.notFound().build()
@@ -44,8 +44,8 @@ class InventoryController(
     }
 
     @DeleteMapping("/{id}")
-    fun deleteItem(@PathVariable id: Long): ResponseEntity<Void> {
-        inventoryServices.deleteItem(id)
+    fun disableItem(@PathVariable id: Long): ResponseEntity<Void> {
+        inventoryServices.disableItem(id)
         return ResponseEntity.ok().build()
     }
 }

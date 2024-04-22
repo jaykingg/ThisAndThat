@@ -50,7 +50,7 @@ class InventoryServices(
     }
 
     @Transactional
-    fun deleteItem(id: Long) {
+    fun disableItem(id: Long) {
         inventoryRepository.findByIdOrNull(id)?.let {
             inventoryRepository.save(
                 it.copy(
