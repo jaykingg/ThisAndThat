@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.ints.shouldBeGreaterThanOrEqual
 import io.kotest.matchers.should
 import io.kotest.matchers.types.shouldBeTypeOf
-import org.example.thisandthat.inventory.fixture.inventoryItem
+import org.example.thisandthat.inventory.fixture.inventoryFixture
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.web.reactive.server.WebTestClient
@@ -18,14 +18,11 @@ class GetAllItemsIT(
     private var webTestClient: WebTestClient
 ) : BehaviorSpec({
     val endPoint = "/api/inventory"
-    val request = webTestClient.get().uri(endPoint)
-
-
 
     beforeSpec {
         repeat(100) { index ->
             inventoryRepository.saveAndFlush(
-                inventoryItem()
+                inventoryFixture
             )
         }
     }
@@ -79,6 +76,7 @@ class GetAllItemsIT(
                         it.content[0].price.shouldBeGreaterThanOrEqual(0)
                         it.content[0].quantity.shouldBeTypeOf<Int>()
                         it.content[0].quantity.shouldBeGreaterThanOrEqual(0)
+                        println(it)
                     }
             }
         }
