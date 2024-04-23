@@ -33,6 +33,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("io.github.serpro69:kotlin-faker:2.0.0-rc.4")
+    implementation("com.appmattus.fixture:fixture-kotest:1.2.0")
 
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.h2database:h2")
