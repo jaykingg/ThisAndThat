@@ -1,8 +1,10 @@
 package org.example.thisandthat.inventory
 
+import core.PagedView
+import core.toPagedView
+import jakarta.validation.constraints.Min
 import org.example.thisandthat.inventory.payload.SaveItemPayload
 import org.example.thisandthat.inventory.payload.UpdateItemPayload
-import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
@@ -14,17 +16,17 @@ import org.springframework.web.bind.annotation.*
 class InventoryController(
     private val inventoryServices: InventoryServices
 ) {
-    @GetMapping("/")
+    @GetMapping
     fun getAllItems(
-        @RequestParam(value = "page", defaultValue = "0") page: Int,
-        @RequestParam(value = "size", defaultValue = "10") size: Int,
-        @RequestParam(value = "sort", defaultValue = "name.asc") sort: String
-    ): Page<InventoryItem> {
+        @RequestParam(value = "page", defaultValue = "0") @Min(0) page: Int,
+        @RequestParam(value = "size", defaultValue = "10") @Min(1) size: Int,
+        @RequestParam(value = "sort", defaultValue = "name") sort: String
+    ): PagedView<InventoryItem> {
         val pageable: Pageable = PageRequest.of(page, size, Sort.by(sort))
-        return inventoryServices.findAllItem(pageable)
+        return inventoryServices.findAllItem(pageable).toPagedView()
     }
 
-    @PostMapping("/")
+    @PostMapping
     fun addItem(@RequestBody payload: SaveItemPayload): InventoryItem {
         return inventoryServices.saveItem(payload)
     }
@@ -36,7 +38,7 @@ class InventoryController(
         } ?: ResponseEntity.notFound().build()
     }
 
-    @PutMapping("/")
+    @PutMapping
     fun updateItem(@RequestBody payload: UpdateItemPayload): ResponseEntity<InventoryItem> {
         return inventoryServices.updateItem(payload)?.let {
             ResponseEntity.ok(it)
